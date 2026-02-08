@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan — Builder · Thinker · Maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #060611;
+    --bg: #0a0b18;
+    --bg-card: #0f1024;
+    --bg-card-hover: #141530;
+    --bg-glass: rgba(15, 16, 36, 0.7);
+    --text: #eaeaf0;
+    --text-secondary: #b0b0c0;
+    --text-muted: #6a6a80;
+    --accent: #7b6ff0;
+    --accent-light: #9d93f8;
+    --accent-glow: rgba(123, 111, 240, 0.15);
+    --accent-glow-strong: rgba(123, 111, 240, 0.25);
+    --cyan: #4ae8c4;
+    --cyan-glow: rgba(74, 232, 196, 0.12);
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --heading: 'Sora', sans-serif;
+    --body: 'Plus Jakarta Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --max-w: 1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .bg-glow .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+  }
+  .bg-glow .orb-1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(123,111,240,0.3), transparent 70%);
+    top: -200px; right: -150px;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+  .bg-glow .orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(74,232,196,0.2), transparent 70%);
+    top: 50%; left: -150px;
+    animation: orbFloat 25s ease-in-out infinite reverse;
+  }
+  .bg-glow .orb-3 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(123,111,240,0.15), transparent 70%);
+    bottom: -100px; right: 20%;
+    animation: orbFloat 18s ease-in-out infinite 5s;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -40px) scale(1.05); }
+    66% { transform: translate(-20px, 30px) scale(0.95); }
+  }
+
+  .grid-lines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+  }
+
+  .content-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(6, 6, 17, 0.75);
+    backdrop-filter: blur(24px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+  .nav-logo .dot { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 40px 100px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .hero-overline {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+  .hero-overline::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--cyan);
+  }
+
+  .hero h1 {
+    font-family: var(--heading);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    max-width: 580px;
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.35s;
+  }
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+    background: var(--accent-glow);
+    transform: translateY(-2px);
+  }
+  .tag .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 44px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, var(--accent) 0%, #5a50d0 100%);
+    color: #fff;
+    font-family: var(--body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.35s;
+    box-shadow: 0 4px 24px rgba(123,111,240,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 36px rgba(123,111,240,0.45);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 30px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.35s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 40px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-glow-strong);
+    border-radius: 100px;
+    background: var(--accent-glow);
+  }
+
+  .section-title {
+    font-family: var(--heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hover), transparent);
+  }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .stat-item {
+    background: var(--bg-card);
+    padding: 40px 28px;
+    text-align: center;
+    transition: all 0.35s;
+    position: relative;
+  }
+  .stat-item:hover { background: var(--bg-card-hover); }
+  .stat-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.4s;
+  }
+  .stat-item:hover::after { width: 60%; }
+
+  .stat-val {
+    font-family: var(--heading);
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-lbl {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-glow);
+    border: 1px solid rgba(123,111,240,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 22px;
+  }
+
+  .card-label {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: var(--cyan-glow);
+    border: 1px solid rgba(74,232,196,0.12);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-family: var(--heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .card p, .card ul {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card ul li {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.86rem;
+  }
+  .card ul li:last-child { border: none; }
+  .card ul li::before {
+    content: '▸';
+    color: var(--accent-light);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .span-rows { grid-row: span 2; }
+
+  /* WRITING */
+  .writing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  .writing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+  }
+  .writing-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.25);
+  }
+
+  .writing-date {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .writing-card h3 {
+    font-family: var(--heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .writing-card p {
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-size: 0.82rem;
+    color: var(--accent-light);
+    font-weight: 500;
+  }
+  .read-more .arrow { transition: transform 0.3s; }
+  .writing-card:hover .read-more .arrow { transform: translateX(5px); }
+
+  .writing-cta {
+    text-align: center;
+    margin-top: 64px;
+  }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .lang-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 28px;
+    transition: all 0.35s;
+  }
+  .lang-item:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+
+  .lang-name {
+    font-family: var(--heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .lang-detail {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .lang-bar {
+    margin-top: 14px;
+    height: 4px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .lang-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* BOOKS */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 30px 28px;
+    transition: all 0.35s;
+  }
+  .book-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+
+  .book-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .book-card h4 {
+    font-family: var(--heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .book-author {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 40px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .footer-brand {
+    font-family: var(--heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .footer-brand .dot { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent-light); }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .section-divider hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: all 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.vis {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .span-rows { grid-row: auto; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { 
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      background: rgba(6,6,17,0.95);
+      backdrop-filter: blur(20px);
+      padding: 20px;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links.open { display: flex; }
+    .mobile-menu-btn { display: block; }
+    .hero { padding: 110px 20px 60px; }
+    section { padding: 60px 20px; }
+    .card-grid, .writing-grid { grid-template-columns: 1fr; }
+    .section-head { flex-wrap: wrap; }
+    .section-line { display: none; }
+    footer { padding: 40px 20px; }
+    .footer-inner { flex-direction: column; }
+    .hero-cta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<div class="grid-lines"></div>
+
+<div class="content-wrap">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Aryan<span class="dot">.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#parliament">Parliament</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#reading">Reading</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="about">
+  <div class="hero-overline">Builder · Thinker · Maker</div>
+  <h1>Co-Creating the<br><span class="gradient-text">Future with Ideas</span></h1>
+  <p class="hero-desc">
+    Young innovator and maker at the intersection of technology, policy, and education.
+    Chancellor of the Exchequer in the Children's Parliament, John Locke essayist,
+    and builder of AI-powered products — driven by curiosity and a bias for action.
+  </p>
+  <div class="hero-tags">
+    <span class="tag"><span class="pulse"></span>Children's Parliament</span>
+    <span class="tag"><span class="pulse"></span>AI Product Builder</span>
+    <span class="tag"><span class="pulse"></span>John Locke Essayist</span>
+    <span class="tag"><span class="pulse"></span>Competitive Chess Player</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#writing" class="btn-primary">Read My Writing &#8594;</a>
+    <a href="#achievements" class="btn-ghost">View Achievements</a>
+  </div>
+</header>
+
+<!-- STATS -->
+<section>
+  <div class="stats reveal">
+    <div class="stat-item">
+      <div class="stat-val">6</div>
+      <div class="stat-lbl">Languages</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">20+</div>
+      <div class="stat-lbl">Awards &amp; Honours</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">2</div>
+      <div class="stat-lbl">AI Products Launched</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">3</div>
+      <div class="stat-lbl">Published Articles</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-head reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Achievements &amp; Awards</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card reveal">
+      <div class="card-icon">&#129504;</div>
+      <span class="card-label">Academic</span>
+      <h3>Competitions &amp; Challenges</h3>
+      <ul>
+        <li>John Locke Essay — High Commendation 2025, Commendation 2024</li>
+        <li>Townsend Warner History Prize — Top 30 (2024 &amp; 2025)</li>
+        <li>Junior Maths Challenge — Gold Award 2023</li>
+        <li>Primary Maths Challenge — Gold Award 2022</li>
+        <li>UK Bebras Computing Finalist — 2023 &amp; 2024</li>
+        <li>QuizClub National Science Championship — Area Heat Finalist</li>
+        <li>Young Geographer of the Year — RGS KS2 (2022)</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#9823;</div>
+      <span class="card-label">Chess</span>
+      <h3>Chess Achievements</h3>
+      <ul>
+        <li>EPSCA Champion — U9 &amp; U11 categories (2022 &amp; 2023)</li>
+        <li>UKCC Surrey Megafinal — 2nd Place U10 2023</li>
+        <li>UKCC Giga/Challengers Finalist 2023</li>
+        <li>Ranked 13th of 195 — UKCC Online Gigafinals</li>
+        <li>U19 School Chess Team player</li>
+        <li>Elite chess club member</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#129302;</div>
+      <span class="card-label">Technology</span>
+      <h3>Tech &amp; Innovation</h3>
+      <ul>
+        <li>1st Place — First Lego League Robotics at Oxford (Y8)</li>
+        <li>Launched futurescholar.ai &amp; nearlyteacher.ai</li>
+        <li>Built Finance Literacy App for UK kids</li>
+        <li>UK Bebras Computing Finalist — 2023 &amp; 2024</li>
+        <li>Active debater in school debating society</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#127925;</div>
+      <span class="card-label">Music &amp; Arts</span>
+      <h3>Music &amp; Performance</h3>
+      <ul>
+        <li>Oboe — ABRSM Grade 5 (2025)</li>
+        <li>Piano — ABRSM Grade 2 (2021)</li>
+        <li>LAMDA Grade 1 — Distinction (2022)</li>
+        <li>Junior Orchestra (2020–2023) &amp; Pink Panthers (2023)</li>
+        <li>Music competition semi-finalist Y6 &amp; Y7</li>
+        <li>Year 8 Drama Showcase — 39 Steps</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#9876;&#65039;</div>
+      <span class="card-label">Sports</span>
+      <h3>Sports &amp; Athletics</h3>
+      <ul>
+        <li>Fencing — Bronze Medal, British School Team Championships (2023 &amp; 2025)</li>
+        <li>Sports Day 2025 — School Shotput Record Breaker</li>
+        <li>Sports Day 2025 — 2nd in 400m, 3rd in 100m Sprint</li>
+        <li>Cricket 1st XI &amp; Football 2nd XI</li>
+        <li>Salle Boston Fencing Club member</li>
+        <li>Golf, Rowing, Kayaking, Tennis, Table Tennis</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#127963;&#65039;</div>
+      <span class="card-label">Leadership</span>
+      <h3>Positions of Responsibility</h3>
+      <ul>
+        <li>Chancellor of the Exchequer — Children's Parliament (2024–2026)</li>
+        <li>Aptus Editor — 2025 &amp; 2026</li>
+        <li>School Council — 2025</li>
+        <li>Form Captain — 2025</li>
+        <li>Enterprise Lead — 2024</li>
+        <li>Commitment Award — 2022 &amp; 2025</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- PARLIAMENT -->
+<section id="parliament">
+  <div class="section-head reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Parliament &amp; Products</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card span-rows reveal">
+      <div class="card-icon">&#127963;&#65039;</div>
+      <span class="card-label">Children's Parliament · 2024–2026</span>
+      <h3>Chancellor of the Exchequer</h3>
+      <p style="margin-bottom: 16px; color: var(--text-secondary); font-size: 0.88rem;">
+        Championing financial literacy, AI policy, environmental action, and animal rights through public speaking, journalism, and direct engagement with leaders.
+      </p>
+      <ul>
+        <li>Financial Literacy talk with Peter Davies</li>
+        <li>Interviewed Emad Mostaque (Stability AI)</li>
+        <li>Speaker at the AIMI Artificial Intelligence Conference</li>
+        <li>Met the Indian High Commissioner to the UK</li>
+        <li>Published 3 articles in First News Newspaper</li>
+        <li>Public speaking featured in CityAM</li>
+        <li>Pitched to Morrison Foerster</li>
+        <li>Tackling Coastal Erosion at Yarmouth</li>
+        <li>Animal Rights Campaigning</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#128187;</div>
+      <span class="card-label">Products</span>
+      <h3>AI Products</h3>
+      <p style="margin-bottom: 14px; color: var(--text-secondary); font-size: 0.88rem;">
+        Built and launched AI-powered platforms addressing real educational needs:
+      </p>
+      <ul>
+        <li><strong style="color:var(--text)">futurescholar.ai</strong> — AI-powered learning platform</li>
+        <li><strong style="color:var(--text)">nearlyteacher.ai</strong> — Intelligent tutoring system</li>
+        <li>Finance Literacy App for UK kids</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-icon">&#9997;&#65039;</div>
+      <span class="card-label">Essays</span>
+      <h3>John Locke Institute</h3>
+      <p style="margin-bottom: 14px; color: var(--text-secondary); font-size: 0.88rem;">
+        Recognised by the prestigious John Locke Essay Competition for philosophical and analytical writing.
+      </p>
+      <ul>
+        <li>2025 — Shortlisted with High Commendation</li>
+        <li>2024 — Shortlisted with Commendation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- WRITING -->
+<section id="writing">
+  <div class="section-head reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Writing &amp; Ideas</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="writing-grid">
+    <div class="writing-card reveal">
+      <div class="writing-date">Coming Soon</div>
+      <h3>The Case for Financial Literacy in Schools</h3>
+      <p>Why every child deserves to understand money, markets, and economic systems — lessons from my time as Chancellor in the Children's Parliament.</p>
+      <span class="read-more">Read article <span class="arrow">&#8594;</span></span>
+    </div>
+
+    <div class="writing-card reveal">
+      <div class="writing-date">Coming Soon</div>
+      <h3>Building AI Products That Matter</h3>
+      <p>What I learned launching futurescholar.ai and nearlyteacher.ai — and why AI in education needs to start with the student, not the algorithm.</p>
+      <span class="read-more">Read article <span class="arrow">&#8594;</span></span>
+    </div>
+
+    <div class="writing-card reveal">
+      <div class="writing-date">Coming Soon</div>
+      <h3>From Chess to Code: Thinking in Systems</h3>
+      <p>How competitive chess shaped the way I approach problem-solving, coding, and building things from scratch.</p>
+      <span class="read-more">Read article <span class="arrow">&#8594;</span></span>
+    </div>
+  </div>
+
+  <div class="writing-cta reveal">
+    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.92rem;">This is where ideas take shape. Articles, essays, and research — coming soon.</p>
+    <a href="#" class="btn-ghost">Subscribe for Updates &#8594;</a>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-head reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Languages</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="lang-grid">
+    <div class="lang-item reveal">
+      <div class="lang-name">English</div>
+      <div class="lang-detail">Fluent — primary language of education</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 100%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">Kannada</div>
+      <div class="lang-detail">Mother tongue</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 95%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">Mandarin Chinese</div>
+      <div class="lang-detail">YCT Level IV — highest youth level before GCSE</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 70%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">French</div>
+      <div class="lang-detail">Highest scorer Y5–Y7 · French magazine contributor</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 65%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">Japanese</div>
+      <div class="lang-detail">Beginner</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 20%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">Greek</div>
+      <div class="lang-detail">Beginner</div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 20%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- READING -->
+<section id="reading">
+  <div class="section-head reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Reading List</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="books-grid">
+    <div class="book-card reveal">
+      <div class="book-num">01</div>
+      <h4>To Kill a Mockingbird</h4>
+      <div class="book-author">Harper Lee</div>
+    </div>
+    <div class="book-card reveal">
+      <div class="book-num">02</div>
+      <h4>Pride and Prejudice</h4>
+      <div class="book-author">Jane Austen</div>
+    </div>
+    <div class="book-card reveal">
+      <div class="book-num">03</div>
+      <h4>Dr Jekyll and Mr Hyde</h4>
+      <div class="book-author">Robert Louis Stevenson</div>
+    </div>
+    <div class="book-card reveal">
+      <div class="book-num">04</div>
+      <h4>Lord of the Flies</h4>
+      <div class="book-author">William Golding</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Aryan<span class="dot">.</span></div>
+      <div class="footer-copy">&copy; 2025 Aryan. All rights reserved.</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://futurescholar.ai" target="_blank">futurescholar.ai</a>
+      <a href="https://nearlyteacher.ai" target="_blank">nearlyteacher.ai</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('vis'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
