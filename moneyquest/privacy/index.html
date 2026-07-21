@@ -1,1 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Quest Kids Privacy Policy | Aryan Shekar</title>
+<meta name="description" content="Privacy Policy for Money Quest Kids, an educational financial-literacy app for children and families.">
+<link rel="canonical" href="https://aryanshekar.com/moneyquest/privacy/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #060611;
+  --bg: #0a0b18;
+  --bg-card: #0f1024;
+  --bg-card-hover: #141530;
+  --text: #eaeaf0;
+  --text-secondary: #b0b0c0;
+  --text-muted: #77778d;
+  --accent: #7b6ff0;
+  --accent-light: #9d93f8;
+  --accent-glow: rgba(123, 111, 240, 0.15);
+  --cyan: #4ae8c4;
+  --cyan-glow: rgba(74, 232, 196, 0.12);
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.14);
+  --heading: 'Sora', sans-serif;
+  --body: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --max-w: 980px;
+}
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.72;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-glow .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.34;
+}
+
+.orb-1 {
+  width: 680px;
+  height: 680px;
+  right: -180px;
+  top: -220px;
+  background: radial-gradient(circle, rgba(123,111,240,0.34), transparent 70%);
+}
+
+.orb-2 {
+  width: 520px;
+  height: 520px;
+  left: -190px;
+  top: 44%;
+  background: radial-gradient(circle, rgba(74,232,196,0.22), transparent 70%);
+}
+
+.grid-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at 50% 28%, black 18%, transparent 72%);
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.skip-link {
+  position: fixed;
+  left: 18px;
+  top: -80px;
+  z-index: 300;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  transition: top .2s ease;
+}
+
+.skip-link:focus { top: 18px; }
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 76px;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: rgba(6, 6, 17, 0.78);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px) saturate(1.4);
+}
+
+.nav-logo {
+  font-family: var(--heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.nav-logo .dot { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  transition: color .25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--accent-light);
+}
+
+main {
+  width: min(var(--max-w), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 100px 0 110px;
+}
+
+.hero {
+  padding-bottom: 46px;
+}
+
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.overline::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+h1 {
+  max-width: 850px;
+  font-family: var(--heading);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1.06;
+  letter-spacing: -.045em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  max-width: 760px;
+  margin-top: 24px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid rgba(74,232,196,.14);
+  border-radius: 100px;
+  background: var(--cyan-glow);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .04em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: .86rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #5a50d0);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(123,111,240,.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 34px rgba(123,111,240,.42);
+}
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.content-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(15,16,36,.88);
+  box-shadow: 0 28px 90px rgba(0,0,0,.28);
+}
+
+.content-card section {
+  padding: 36px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.content-card section:last-child { border-bottom: 0; }
+
+h2 {
+  margin-bottom: 12px;
+  font-family: var(--heading);
+  font-size: 1.35rem;
+  letter-spacing: -.02em;
+}
+
+h3 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-family: var(--heading);
+  font-size: 1.02rem;
+}
+
+p,
+li {
+  color: var(--text-secondary);
+}
+
+p + p { margin-top: 12px; }
+
+ul,
+ol {
+  margin-top: 12px;
+  padding-left: 22px;
+}
+
+li + li { margin-top: 7px; }
+
+strong { color: var(--text); }
+
+a { color: var(--accent-light); }
+a:hover { color: var(--cyan); }
+
+.notice {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(74,232,196,.15);
+  border-left: 3px solid var(--cyan);
+  border-radius: var(--radius-sm);
+  background: var(--cyan-glow);
+  color: var(--text-secondary);
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.help-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+
+.help-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(123,111,240,.18);
+  border-radius: var(--radius-sm);
+  background: var(--accent-glow);
+  font-size: 1.25rem;
+}
+
+.help-card h2 {
+  font-size: 1.12rem;
+  margin-bottom: 8px;
+}
+
+footer {
+  width: min(var(--max-w), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 44px 0 56px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-brand {
+  font-family: var(--heading);
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.footer-brand .dot { color: var(--accent); }
+
+.footer-copy {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: .76rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: .8rem;
+}
+
+.footer-links a:hover { color: var(--accent-light); }
+
+@media (max-width: 720px) {
+  nav {
+    padding: 14px 20px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-links { gap: 14px 20px; }
+
+  main {
+    width: min(100% - 32px, var(--max-w));
+    padding: 70px 0 80px;
+  }
+
+  .content-card section { padding: 28px 24px; }
+  .help-grid { grid-template-columns: 1fr; }
+
+  footer {
+    width: min(100% - 32px, var(--max-w));
+  }
+
+  .footer-inner { flex-direction: column; }
+}
+
+@media print {
+  .bg-glow,
+  .grid-lines,
+  nav,
+  footer,
+  .actions { display: none; }
+
+  body { background: #fff; color: #111; }
+  main { width: 100%; padding: 0; }
+  .content-card { border: 0; box-shadow: none; background: #fff; }
+  .content-card section { border-color: #ddd; }
+  p, li { color: #222; }
+  h1, h2, h3, strong { color: #111; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="bg-glow" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+<div class="grid-lines" aria-hidden="true"></div>
+
+<div class="page-wrap">
+  <nav aria-label="Primary navigation">
+    <a href="/" class="nav-logo">Aryan<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/moneyquest/support/">Support</a></li>
+      <li><a href="/moneyquest/privacy/" aria-current="page">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <header class="hero">
+      <div class="overline">Money Quest Kids · Privacy</div>
+      <h1>A safe place to <span class="gradient-text">learn about money</span></h1>
+      <p class="lead">This policy explains what information the app uses, where it is stored and how children’s privacy is protected.</p>
+    </header>
+
+    
+<div class="meta" aria-label="Policy information">
+  <span class="badge">Last updated · 21 July 2026</span>
+  <span class="badge">Money Quest Kids · iOS</span>
+</div>
+
+<article class="content-card" style="margin-top:28px;">
+  <section>
+    <h2>1. About this policy</h2>
+    <p>
+      This Privacy Policy explains how Money Quest Kids handles information when children,
+      parents or guardians use the app. Money Quest Kids is an educational financial-literacy
+      app provided by EqualEd.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Information used within the app</h2>
+    <p>The app may allow a parent or child to create or enter:</p>
+    <ul>
+      <li>A child profile name or nickname</li>
+      <li>A four-digit parental PIN</li>
+      <li>Learning progress, completed lessons, stars, badges and streaks</li>
+      <li>Quiz answers, quiz results and game progress</li>
+      <li>Simulated savings goals</li>
+      <li>Simulated virtual-investment activity</li>
+    </ul>
+    <div class="notice">
+      Parents and guardians should use a nickname rather than a child’s full legal name.
+      Do not enter sensitive personal or financial information into the app.
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Data collection and storage</h2>
+    <p>
+      Money Quest Kids does not require users to create an online account. In the current
+      version of the app, the child profile name, parental PIN and learning activity are
+      stored locally on the user’s device and are not transmitted to EqualEd.
+    </p>
+    <p>
+      EqualEd does not use the information entered into the app to identify or contact a child.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Children’s privacy</h2>
+    <p>
+      Money Quest Kids is designed for children and families. The app does not ask children
+      to provide an email address, postal address, telephone number, precise location,
+      photograph or other direct contact information.
+    </p>
+    <p>
+      The app does not include public profiles, social networking, direct messaging,
+      behavioural advertising or targeted advertising.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Parental PIN</h2>
+    <p>
+      The four-digit parental PIN is created by a parent or guardian on the device. It is
+      used to protect parent-controlled areas of the app. It is not an online account
+      password and is not sent to EqualEd.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Simulated financial activity</h2>
+    <p>
+      Savings, investing and portfolio features use simulated money only. Money Quest Kids
+      does not provide banking, payment, brokerage, investment-advisory or real-money
+      trading services.
+    </p>
+  </section>
+
+  <section>
+    <h2>7. Advertising and sharing</h2>
+    <p>
+      Money Quest Kids contains no third-party advertising. EqualEd does not sell or rent
+      children’s personal information and does not share information entered into the app
+      with advertisers or data brokers.
+    </p>
+  </section>
+
+  <section>
+    <h2>8. Data deletion</h2>
+    <p>
+      Users can remove locally stored information by using any reset or deletion feature
+      available in the app. Deleting the app from the device will also remove locally stored
+      app data, subject to the device operating system and any device backups controlled by
+      the user.
+    </p>
+  </section>
+
+  <section>
+    <h2>9. Security</h2>
+    <p>
+      We use reasonable design and technical measures appropriate to an educational app.
+      No device or storage system can be guaranteed to be completely secure. Parents and
+      guardians should therefore avoid entering sensitive information.
+    </p>
+  </section>
+
+  <section>
+    <h2>10. External services and links</h2>
+    <p>
+      Distribution of the app through Apple’s App Store is subject to Apple’s own privacy
+      practices. If the app or this website links to an external service, that service may
+      have its own privacy policy and terms.
+    </p>
+  </section>
+
+  <section>
+    <h2>11. Changes to this policy</h2>
+    <p>
+      We may update this policy when the app changes or when legal requirements change.
+      The latest version will be published on this page with a revised “Last updated” date.
+    </p>
+  </section>
+
+  <section>
+    <h2>12. Contact us</h2>
+    <p>
+      For privacy questions or requests concerning Money Quest Kids, email
+      <a href="mailto:support@aryanshekar.com?subject=Money%20Quest%20Kids%20Privacy">
+        support@aryanshekar.com
+      </a>.
+    </p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:support@aryanshekar.com?subject=Money%20Quest%20Kids%20Privacy">Email privacy support &#8594;</a>
+      <a class="btn-ghost" href="/moneyquest/support/">Open support page</a>
+    </div>
+  </section>
+</article>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Aryan<span class="dot">.</span></div>
+        <div class="footer-copy">&copy; 2026 Aryan. Money Quest Kids is for educational use only.</div>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/moneyquest/support/">Support</a>
+        <a href="/moneyquest/privacy/">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
