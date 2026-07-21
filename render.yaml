@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: aryanshekar-com
+    runtime: static
+    plan: free
+    buildCommand: echo "No build required"
+    staticPublishPath: .
+    routes:
+      - type: redirect
+        source: /privacy
+        destination: /moneyquest/privacy/
+      - type: redirect
+        source: /support
+        destination: /moneyquest/support/
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
